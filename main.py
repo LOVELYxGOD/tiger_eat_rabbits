@@ -29,3 +29,26 @@ class Rabbits:
 
     def to_find(self):
         self.is_find = True
+
+def show_field(tiger, rabbits):
+    field = []
+    for i in range(5):
+        row = []
+        for i in range(5):
+            row.append('.')
+        field.append(row)
+
+    field[tiger.cord_x][tiger.cord_y] = 'T'
+    for rabbit in rabbits:
+        if not rabbit.is_find:
+            field[rabbit.cord_x][rabbit.cord_y] = 'R'
+    print(field)
+def init():
+    tiger = Tiger()
+    rabbit_1 = Rabbits(random.randint(1, 4), random.randint(1, 4))
+    rabbit_2 = Rabbits(random.randint(1, 4), random.randint(1, 4))
+    rabbits = [rabbit_1, rabbit_2]
+
+    show_field(tiger, rabbits)
+
+init()
