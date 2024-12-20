@@ -13,14 +13,25 @@ class Tiger:
         self.cord_x = max(0, min(self.cord_x, 4))
         self.cord_y = max(0, min(self.cord_y, 4))
 
-    def ubdate_state(self):
+    def ubdate_state(self, rabbits):
         if self.state == 'hunt prey':
             print('tiger is hunting')
             self.random_stroll()
+            if any(self.is_near_rabbit(rabbits) for rabbit in rabbits):
+                self.state = 'attack'
+        elif self.state == 'attack':
+            if random.random() < self.lucky_attack:
+                print('Tiger hunt rabbit😈')
+                for rabbit in rabbits:
+                    if self.is_near_rabbit(rabbit):
+                        rabbit.to_find()
+                self.state = 'Go home'
+        elif self.state == 'Go home':
+            self.cord_x = 0
+            self.cord_y = 0
 
     def is_near_rabbit(self, rabbit):
         return abs(self.cord_x - rabbit.cord_x) <= 1 and abs(self.cord_y - rabbit.cord_y) <= 1
-
 
 class Rabbit:
     def __init__(self, x, y):
