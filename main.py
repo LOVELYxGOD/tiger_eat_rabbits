@@ -18,9 +18,11 @@ class Tiger:
             print('tiger is hunting')
             self.random_stroll()
 
+    def is_near_rabbit(self, rabbit):
+        return abs(self.cord_x - rabbit.cord_x) <= 1 and abs(self.cord_y - rabbit.cord_y) <= 1
 
 
-class Rabbits:
+class Rabbit:
     def __init__(self, x, y):
         self.is_find = False
         self.cord_x = x
@@ -42,11 +44,14 @@ def show_field(tiger, rabbits):
     for rabbit in rabbits:
         if not rabbit.is_find:
             field[rabbit.cord_x][rabbit.cord_y] = 'R'
-    print(field)
+
+    for row in field:
+        print(" ".join(row))
+    print()
 def init():
     tiger = Tiger()
-    rabbit_1 = Rabbits(random.randint(1, 4), random.randint(1, 4))
-    rabbit_2 = Rabbits(random.randint(1, 4), random.randint(1, 4))
+    rabbit_1 = Rabbit(random.randint(1, 4), random.randint(1, 4))
+    rabbit_2 = Rabbit(random.randint(1, 4), random.randint(1, 4))
     rabbits = [rabbit_1, rabbit_2]
 
     show_field(tiger, rabbits)
