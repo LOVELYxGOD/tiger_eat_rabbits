@@ -13,11 +13,11 @@ class Tiger:
         self.cord_x = max(0, min(self.cord_x, 4))
         self.cord_y = max(0, min(self.cord_y, 4))
 
-    def ubdate_state(self, rabbits):
+    def update_state(self, rabbits):
         if self.state == 'hunt prey':
             print('tiger is hunting')
             self.random_stroll()
-            if any(self.is_near_rabbit(rabbits) for rabbit in rabbits):
+            if any(self.is_near_rabbit(rabbit) for rabbit in rabbits):
                 self.state = 'attack'
         elif self.state == 'attack':
             if random.random() < self.lucky_attack:
@@ -65,6 +65,27 @@ def init():
     rabbit_2 = Rabbit(random.randint(1, 4), random.randint(1, 4))
     rabbits = [rabbit_1, rabbit_2]
 
+    while tiger.state != 'Go home':
+        print(tiger)
+
+        for rabbit in rabbits:
+            print(rabbit)
+
+        show_field(tiger, rabbits)
+
+        tiger.update_state(rabbits)
+
+    print(tiger)
+
+    for rabbit in rabbits:
+        print(rabbit)
+
+    tiger.update_state(rabbits)
     show_field(tiger, rabbits)
 
+    if tiger.state == 'Go home':
+        print('tiger in home')
+
 init()
+
+
