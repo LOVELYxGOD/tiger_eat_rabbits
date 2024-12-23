@@ -1,5 +1,8 @@
 import random
+import os
+import time
 
+clear = lambda: os.system('cls')
 class Tiger:
     def __init__(self):
         self.state = 'hunt prey'
@@ -66,6 +69,8 @@ def init():
     rabbits = [rabbit_1, rabbit_2]
 
     while tiger.state != 'Go home':
+        # os.system('cls' if os.name == 'nt' else 'clear')
+        clear()
         print(tiger)
 
         for rabbit in rabbits:
@@ -75,16 +80,22 @@ def init():
 
         tiger.update_state(rabbits)
 
+        time.sleep(1)
+
     print(tiger)
 
     for rabbit in rabbits:
         print(rabbit)
-
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    clear()
     tiger.update_state(rabbits)
+
+
     show_field(tiger, rabbits)
 
     if tiger.state == 'Go home':
         print('tiger in home')
+
 
 init()
 
